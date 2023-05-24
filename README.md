@@ -21,21 +21,21 @@ npm install
 ```
 ## Usage
 
-    After completing the installation steps, run the following command to start the development server:
+After completing the installation steps, run the following command to start the development server:
 
 ```shell
 npm run dev
 
 ```
 
-    Once the server is running, open your browser and visit http://localhost:3000 to access the todo list application.
+Once the server is running, open your browser and visit http://localhost:3000 to access the todo list application.
 
-    Use the interface to manage your tasks:
-        To add a new task, type the task description in the input field and press Enter.
-        To edit a task, click the "Edit" button next to the task, modify the description, and press Enter.
-        To delete a task, click the "Delete" button next to the task.
+Use the interface to manage your tasks:
+    To add a new task, type the task description in the input field and press Enter.
+    To edit a task, click the "Edit" button next to the task, modify the description, and press Enter.
+    To delete a task, click the "Delete" button next to the task.
 
-Folder Structure
+## Folder Structure
 
 The project's folder structure is as follows:
 
@@ -45,16 +45,13 @@ The project's folder structure is as follows:
     index.html: The HTML template for the application.
     package.json: The npm package configuration file.
 
-Contributing
-
-Contributions are welcome! If you find a bug or want to add new features, please open an issue or submit a pull request.
-License
+## License
 
 This project is licensed under the MIT License. Feel free to use and modify the code according to your needs.
-Acknowledgements
 
-This todo list application was developed using the Vite framework and inspired by various examples and tutorials available online.
+
+## Acknowledgements
+
+This todo list application was developed using the Vite framework.
 
 If you have any questions or need further assistance, please feel free to reach out.
-
-Happy task management!
