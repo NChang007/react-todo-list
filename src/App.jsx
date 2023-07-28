@@ -7,29 +7,65 @@ import { TbEdit } from 'react-icons/tb'
 
 function App() {
   const [todos, setTodos] = useState([])
+
+  //  set todos from api 
+  useEffect(()=>{
+    fetch('https://fake-todo-list-52f9a4ed80ce.herokuapp.com/todos/user/nelsonc924')
+    .then((response) => response.json())
+    .then((data) => setTodos([...data]));
+  },[])
+
   const createTodo = (e) => {
     e.preventDefault()
     let newTodo = {
       'label': e.target.todoInput.value,
       'done': false
     }
-    // check if todo already exists 
+    let currentTodos = todos
     let isNew = true
     todos.forEach(todo => {
       if(todo.label.toLowerCase() === newTodo.label.toLowerCase()){
         isNew = false
       }
     })
-    // if it does return an alert else setTodos
-    isNew ? setTodos([...todos, newTodo]) : alert("TODO ALREADY EXISTS")
+    //  check if todo is new 
+    if (todos === false){
+      alert("TODO ALREADY EXISTS")
+    } else {
+      currentTodos.push(newTodo)
+      fetch('https://fake-todo-list-52f9a4ed80ce.herokuapp.com/todos/user/nelsonc924', {
+        method: "PUT",
+        body: JSON.stringify(currentTodos),
+        headers: {
+            "Content-Type": "application/json"
+        }
+      })
+      .then(resp => { return resp.json() })
+      .then(data => { console.log(data); setTodos([...currentTodos]); })
+      .catch(error => { console.log(error) })
+    }
+
     // clear the intput no matter what happens 
     e.target.todoInput.value = ""
   }
   const removeTodo = (e,idx) => {
     e.preventDefault()
     let filteredTodos = todos.filter((todo,index) => { return index !== idx })
-    setTodos(filteredTodos)
+    // setTodos(filteredTodos)
+
+    // connecting to api
+    fetch('https://fake-todo-list-52f9a4ed80ce.herokuapp.com/todos/user/nelsonc924', {
+      method: "PUT",
+      body: JSON.stringify(filteredTodos),
+      headers: {
+          "Content-Type": "application/json"
+      }
+    })
+    .then(resp => { return resp.json() })
+    .then(data => { setTodos([...filteredTodos]) })
+    .catch(error => { console.log(error) })
   }
+
   const updateTodo = (e,idx) => {
     e.preventDefault()
     let todo = todos[idx]
@@ -58,6 +94,7 @@ function App() {
 
     listItem.appendChild(form)
   }
+
   return (
     <>
       <div className='todo'>
