@@ -28,12 +28,12 @@ npm run dev
 
 ```
 
-    Once the server is running, open your browser and visit http://localhost:3000 to access the todo list application.
+Once the server is running, open your browser and visit http://localhost:3000 to access the todo list application.
 
-    Use the interface to manage your tasks:
-        To add a new task, type the task description in the input field and press Enter.
-        To edit a task, click the "Edit" button next to the task, modify the description, and press Enter.
-        To delete a task, click the "Delete" button next to the task.
+Use the interface to manage your tasks:
+    To add a new task, type the task description in the input field and press Enter.
+    To edit a task, click the "Edit" button next to the task, modify the description, and press Enter.
+    To delete a task, click the "Delete" button next to the task.
 
 Folder Structure
 

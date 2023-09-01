@@ -101,3 +101,7 @@ button:focus-visible {
 .hide-elem{
   display: none !important;
 }
+
+.strike {
+  text-decoration: line-through;
+}

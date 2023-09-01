@@ -1,12 +1,22 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { TbTrashX } from 'react-icons/tb'
 import { TbEdit } from 'react-icons/tb'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [todos, setTodos] = useState([])
+  const toastOpts = {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  }
   const createTodo = (e) => {
     e.preventDefault()
     let newTodo = {
@@ -21,7 +31,7 @@ function App() {
       }
     })
     // if it does return an alert else setTodos
-    isNew ? setTodos([...todos, newTodo]) : alert("TODO ALREADY EXISTS")
+    isNew ? setTodos([...todos, newTodo]) : toast.error('TODO ALREADY EXISTS',toastOpts)
     // clear the intput no matter what happens 
     e.target.todoInput.value = ""
   }
@@ -29,6 +39,14 @@ function App() {
     e.preventDefault()
     let filteredTodos = todos.filter((todo,index) => { return index !== idx })
     setTodos(filteredTodos)
+  }
+  const completeTask = (e, idx) => {
+    e.preventDefault()
+    e.target.checked = true
+    let taskInput = document.querySelector(`.task-input-${idx}`)
+    taskInput.checked = false
+    console.log(taskInput.checked)
+    document.querySelector(`.task-label-${idx}`).classList.toggle('strike')
   }
   const updateTodo = (e,idx) => {
     e.preventDefault()
@@ -60,6 +78,19 @@ function App() {
   }
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
       <div className='todo'>
         <h1>Todo List</h1>
         <form onSubmit={createTodo}>
@@ -70,7 +101,10 @@ function App() {
             todos.map((todo,idx) => {
               return(
                 <li id={'listItem'+idx} key={idx}>
-                  <span>{todo.label}</span>
+                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <input className={'task-input-' + idx} type="checkbox" onChange={(e) => completeTask(e,idx)}/>
+                    <span className={'task-label-' + idx}>{todo.label}</span>
+                  </div>
                   <div style={{display: 'flex', gap: '5px'}}>
                     <button onClick={(e) => updateTodo(e,idx)}><TbEdit/></button>
                     <button onClick={(e) => removeTodo(e,idx)}><TbTrashX/></button>
