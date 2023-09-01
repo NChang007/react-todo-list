@@ -41,13 +41,14 @@ function App() {
     setTodos(filteredTodos)
   }
   const completeTask = (e, idx) => {
-    e.preventDefault()
-    e.target.checked = true
-    let taskInput = document.querySelector(`.task-input-${idx}`)
-    taskInput.checked = false
-    console.log(taskInput.checked)
     document.querySelector(`.task-label-${idx}`).classList.toggle('strike')
+    let updatedTodos = todos
+    updatedTodos[idx].done = !updatedTodos[idx].done
+    console.log(updatedTodos[idx].done);
+    setTodos(updatedTodos)
   }
+
+  console.log(todos);
   const updateTodo = (e,idx) => {
     e.preventDefault()
     let todo = todos[idx]
