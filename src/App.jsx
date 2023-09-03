@@ -23,6 +23,7 @@ function App() {
       'label': e.target.todoInput.value,
       'done': false
     }
+    if (newTodo.label === '') return toast.error('PLEASE ENTER A TODO',toastOpts)
     // check if todo already exists 
     let isNew = true
     todos.forEach(todo => {
@@ -40,15 +41,10 @@ function App() {
     let filteredTodos = todos.filter((todo,index) => { return index !== idx })
     setTodos(filteredTodos)
   }
-  const completeTask = (e, idx) => {
-    document.querySelector(`.task-label-${idx}`).classList.toggle('strike')
-    let updatedTodos = todos
-    updatedTodos[idx].done = !updatedTodos[idx].done
-    console.log(updatedTodos[idx].done);
-    setTodos(updatedTodos)
+  const completeTask = (idx) => {
+    todos[idx].done = !todos[idx].done
+    setTodos([...todos])
   }
-
-  console.log(todos);
   const updateTodo = (e,idx) => {
     e.preventDefault()
     let todo = todos[idx]
@@ -100,11 +96,12 @@ function App() {
         <ul className='todos-list'>
           {
             todos.map((todo,idx) => {
+              let randID = Math.floor(Math.random()*Date.now())
               return(
-                <li id={'listItem'+idx} key={idx}>
+                <li id={'listItem'+idx} key={randID}>
                   <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                    <input className={'task-input-' + idx} type="checkbox" onChange={(e) => completeTask(e,idx)}/>
-                    <span className={'task-label-' + idx}>{todo.label}</span>
+                    <input className={'checkInput task-input-' + idx} checked={todo.done? true : false} type="checkbox" onChange={() => completeTask(idx)}/>
+                    <span className={'task-label-' + idx + (todo.done? ' strike' : '')}>{todo.label}</span>
                   </div>
                   <div style={{display: 'flex', gap: '5px'}}>
                     <button onClick={(e) => updateTodo(e,idx)}><TbEdit/></button>

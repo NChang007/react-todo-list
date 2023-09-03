@@ -29,6 +29,9 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url(./assets/bg.svg); 
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1 {
@@ -72,6 +75,8 @@ button:focus-visible {
   width: 400px;
   border: 1px solid #fff;
   padding-block-end: 1rem;
+  backdrop-filter: blur(320px);
+  background-color: rgba(255, 255, 255, 0.07);
 }
 .todo form input {
   width: 80%;
@@ -97,6 +102,9 @@ button:focus-visible {
   display: flex;
   padding: 5px 10px;
   margin: 0;;
+}
+.checkInput {
+  margin-inline-end: 1em;
 }
 .hide-elem{
   display: none !important;
